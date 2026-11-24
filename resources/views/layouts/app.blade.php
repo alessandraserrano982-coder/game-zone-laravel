@@ -14,6 +14,11 @@
         <!-- Scripts / Tailwind de Breeze -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+        <!-- Icono para navegador y accesos directos en celular -->
+        <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('icon.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('icon.png') }}">
+        <meta name="theme-color" content="#0b0614">
+
         <style>
             body {
                 background-color: #0b0614 !important;
