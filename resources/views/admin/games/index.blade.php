@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración - GAME ZONE</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('icon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('icon.png') }}">
+    <meta name="theme-color" content="#0b0614">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-[#0b0614] text-gray-100 font-sans antialiased min-h-screen flex flex-col justify-between"
