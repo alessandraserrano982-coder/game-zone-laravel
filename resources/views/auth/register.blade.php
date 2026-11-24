@@ -33,6 +33,9 @@
                         <label class="block text-xs font-mono uppercase text-gray-400 mb-1">Contraseña</label>
                         <input type="password" name="password" required autocomplete="new-password" placeholder="••••••••"
                             class="w-full bg-[#0b0614] border border-[#7c3aed] rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-cyan-400 transition">
+                        <p class="mt-1 text-[11px] text-cyan-300/80 font-mono">
+                            Mínimo 8 caracteres.
+                        </p>
                         <x-input-error :messages="$errors->get('password')" class="mt-1 text-xs text-rose-400" />
                     </div>
 
