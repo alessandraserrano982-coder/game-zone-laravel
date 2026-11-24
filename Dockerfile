@@ -36,5 +36,8 @@ RUN npm ci && npm run build
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Render inyecta el puerto en la variable PORT (por defecto 80)
-CMD sed -i "s/80/${PORT:-80}/g" /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf && apache2-foreground
+# Configurar puerto de Render, correr migraciones y arrancar Apache
+CMD sed -i "s/80/${PORT:-80}/g" /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf \
+    && php artisan config:clear \
+    && php artisan migrate --force \
+    && apache2-foreground
