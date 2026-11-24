@@ -110,14 +110,21 @@
                         </div>
 
                         @auth
-                            <form action="{{ route('cart.add') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="game_id" value="{{ $game->id }}">
-                                <button type="submit"
-                                        class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-black text-xs tracking-wider uppercase shadow-[0_0_20px_rgba(6,182,212,0.4)] transition">
-                                    Añadir al carrito 🛒
-                                </button>
-                            </form>
+                            @if(in_array($game->id, $ownedGameIds ?? []))
+                                <a href="{{ route('library.index') }}"
+                                   class="block w-full text-center py-3 rounded-xl bg-emerald-950/80 border border-emerald-500/40 hover:bg-emerald-900/80 text-emerald-300 font-black text-xs tracking-wider uppercase transition">
+                                    Adquirido · Ver en biblioteca
+                                </a>
+                            @else
+                                <form action="{{ route('cart.add') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="game_id" value="{{ $game->id }}">
+                                    <button type="submit"
+                                            class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-black text-xs tracking-wider uppercase shadow-[0_0_20px_rgba(6,182,212,0.4)] transition">
+                                        Añadir al carrito 🛒
+                                    </button>
+                                </form>
+                            @endif
                         @else
                             <a href="{{ route('register') }}"
                                class="block w-full text-center py-3 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-black text-xs tracking-wider uppercase shadow-[0_0_20px_rgba(6,182,212,0.4)] transition">
