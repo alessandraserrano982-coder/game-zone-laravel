@@ -2,26 +2,26 @@
 
 namespace App\Providers;
 
+use App\Models\Library;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        if ($this->app->environment('local') || $this->app->environment('production')) {
-            URL::forceScheme('https');
-        }
+        View::composer('*', function ($view) {
+            $ownedGameIds = Auth::check()
+                ? Library::where('user_id', Auth::id())->pluck('game_id')->toArray()
+                : [];
+
+            $view->with('ownedGameIds', $ownedGameIds);
+        });
     }
 }

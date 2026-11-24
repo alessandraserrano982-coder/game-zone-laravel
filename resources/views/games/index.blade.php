@@ -65,13 +65,19 @@
                                             Comprar 🛒
                                         </a>
                                     @else
-                                        <form action="{{ route('cart.add') }}" method="POST" class="shrink-0">
-                                            @csrf
-                                            <input type="hidden" name="game_id" value="{{ $featuredGame->id }}">
-                                            <button type="submit" class="px-3 sm:px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition-all shadow-md">
-                                                Comprar 🛒
-                                            </button>
-                                        </form>
+                                        @if(in_array($featuredGame->id, $ownedGameIds ?? []))
+                                            <a href="{{ route('library.index') }}" class="px-3 sm:px-4 py-2 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-semibold transition-all text-center shrink-0">
+                                                Adquirido
+                                            </a>
+                                        @else
+                                            <form action="{{ route('cart.add') }}" method="POST" class="shrink-0">
+                                                @csrf
+                                                <input type="hidden" name="game_id" value="{{ $featuredGame->id }}">
+                                                <button type="submit" class="px-3 sm:px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition-all shadow-md">
+                                                    Comprar 🛒
+                                                </button>
+                                            </form>
+                                        @endif
                                     @endguest
                                 </div>
                             </div>
@@ -157,13 +163,19 @@
                                             Comprar 🛒
                                         </a>
                                     @else
-                                        <form action="{{ route('cart.add') }}" method="POST" class="w-full sm:w-auto">
-                                            @csrf
-                                            <input type="hidden" name="game_id" value="{{ $game->id }}">
-                                            <button type="submit" class="w-full py-1.5 sm:py-2 px-2.5 sm:px-3 rounded-xl font-medium text-white bg-purple-600 hover:bg-purple-500 transition-all text-[11px] sm:text-xs shadow-md">
-                                                Comprar 🛒
-                                            </button>
-                                        </form>
+                                        @if(in_array($game->id, $ownedGameIds ?? []))
+                                            <a href="{{ route('library.index') }}" class="w-full sm:w-auto py-1.5 sm:py-2 px-2.5 sm:px-3 rounded-xl font-medium text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 transition-all text-[11px] sm:text-xs text-center">
+                                                Adquirido
+                                            </a>
+                                        @else
+                                            <form action="{{ route('cart.add') }}" method="POST" class="w-full sm:w-auto">
+                                                @csrf
+                                                <input type="hidden" name="game_id" value="{{ $game->id }}">
+                                                <button type="submit" class="w-full py-1.5 sm:py-2 px-2.5 sm:px-3 rounded-xl font-medium text-white bg-purple-600 hover:bg-purple-500 transition-all text-[11px] sm:text-xs shadow-md">
+                                                    Comprar 🛒
+                                                </button>
+                                            </form>
+                                        @endif
                                     @endguest
                                 </div>
                             </div>
